@@ -1,38 +1,34 @@
 public class SingletonPatternExample {
     public static void main(String[] args) {
-        // Testing Singleton Logger
-        SystemLogger systemLogger1 = SystemLogger.getSystemLogger();
-        SystemLogger systemLogger2 = SystemLogger.getSystemLogger();
+        // Verify Singleton Logger
+        Logger firstLogger = Logger.getInstance();
+        Logger secondLogger = Logger.getInstance();
         
-        System.out.println("Same logger instance? " + (systemLogger1 == systemLogger2));
-        systemLogger1.record("System initialization completed");
-        systemLogger2.record("Processing user request");
+        System.out.println("Is single instance? " + (firstLogger == secondLogger));
+        firstLogger.logMessage("Application launched");
+        secondLogger.logMessage("User action recorded");
     }
 }
 
-class SystemLogger {
-    // Static instance for Singleton
-    private static SystemLogger singletonLogger;
+class Logger {
+    private static Logger singleInstance;
     
-    // Private constructor
-    private SystemLogger() {
-        System.out.println("SystemLogger created");
+    private Logger() {
+        System.out.println("Logger instance initialized");
     }
     
-    // Static method to access the singleton instance
-    public static SystemLogger getSystemLogger() {
-        if (singletonLogger == null) {
-            synchronized (SystemLogger.class) {
-                if (singletonLogger == null) {
-                    singletonLogger = new SystemLogger();
+    public static Logger getInstance() {
+        if (singleInstance == null) {
+            synchronized (Logger.class) {
+                if (singleInstance == null) {
+                    singleInstance = new Logger();
                 }
             }
         }
-        return singletonLogger;
+        return singleInstance;
     }
     
-    // Method to record log messages
-    public void record(String message) {
-        System.out.println("SYSTEM LOG: " + message);
+    public void logMessage(String msg) {
+        System.out.println("LOG ENTRY: " + msg);
     }
 }
