@@ -1,0 +1,13 @@
+.top-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Align to top */
+  height: 100vh;
+  padding-top: 40px; /* Add space from top */
+  background-color: #f0f0f0;
+}
+
+h1 {
+  font-size: 2rem;
+  color: #333;
+}
